@@ -1,6 +1,6 @@
 import React from 'react';
 import './Styles/footer.css';
-import HeadoutLogo from './Images/headout.png';
+import HeadoutLogo from './Images/bv.png';
 import Googlelogo from './Images/gplus-connect.png';
 import Twitterlogo from './Images/twitter-connect.png';
 import Facebooklogo from './Images/fb-connect.png';
@@ -12,7 +12,7 @@ const Footer = () => (
     <div className="footer-wrapper">
       <div className="column-one">
         <img id="footer" src={HeadoutLogo} alt="Headout" />
-        <p>Headout is building the future of how we experience our cities.</p>
+        <p>BonVoyage is building the future of how we experience our cities.</p>
         <p
           style={{
             color: '#2980b9',
@@ -23,27 +23,27 @@ const Footer = () => (
           <span role="img" aria-label="love">
             ❤️
           </span>{' '}
-          by lastnamearya
+          by Underdawgs
         </p>
-        <p>&copy; Headout Inc.</p>
+        <p>&copy; BonVoyage Inc.</p>
       </div>
       <div className="column-two">
         <h3>Cities</h3>
         <ul>
-          <li>New York</li>
-          <li>Las Vegas</li>
-          <li>Rome</li>
-          <li>Paris</li>
-          <li>London</li>
-          <li>Dubai</li>
-          <li>Barcelona</li>
+          <li>Nainital</li>
+          <li>Delhi</li>
+          <li>Jaipur</li>
+          <li>Mumbai</li>
+          <li>Shimla</li>
+          <li>Ooty</li>
+          <li>Varanasi</li>
           <li>+8 more</li>
         </ul>
       </div>
       <div className="column-three">
         <h3>About us</h3>
         <ul>
-          <li>About Headout</li>
+          <li>About BonVoyage</li>
           <li>Careers</li>
           <li>Blog</li>
           <li>Privacy Policy</li>
@@ -54,7 +54,7 @@ const Footer = () => (
         <h3>Contact</h3>
         <p>Feel free to get in touch via email:</p>
         <p style={{ color: '#4fc3f7', cursor: 'pointer' }}>
-          arya.jigyasu6815@gmail.com
+          jackdaniels5882@gmail.com
         </p>
         <div className="social-media-contact">
           <img

@@ -2,21 +2,21 @@ import React, { Component } from 'react';
 import Select from 'react-select';
 
 const options = [
-  { value: 'New York', label: 'New York' },
-  { value: 'Las Vegas', label: 'Las Vegas' },
-  { value: 'Rome', label: 'Rome' },
-  { value: 'Paris', label: 'Paris' },
-  { value: 'London', label: 'London' },
-  { value: 'Dubai', label: 'Dubai' },
-  { value: 'Barcelona', label: 'Barcelona' },
-  { value: 'Madrid', label: 'Madrid' },
-  { value: 'Singapore', label: 'Singapore' },
-  { value: 'Venice', label: 'Venice' },
-  { value: 'Milan', label: 'Milan' },
-  { value: 'Naples', label: 'Naples' },
-  { value: 'Budapest', label: 'Budapest' },
-  { value: 'Edinburg', label: 'Edinburg' },
-  { value: 'Florence', label: 'Florence' }
+  { value: 'nainital', label: 'Nainital' },
+  { value: 'delhi', label: 'Delhi' },
+  { value: 'jaipur', label: 'Jaipur' },
+  { value: 'mumbai', label: 'Mumbai' },
+  { value: 'shimla', label: 'Shimla' },
+  { value: 'ooty', label: 'Ooty' },
+  { value: 'varanasi', label: 'Varanasi' },
+  { value: 'agra', label: 'Agra' },
+  { value: 'chennai', label: 'Chennai' },
+  { value: 'mussoorie', label: 'Mussoorie' },
+  { value: 'manali', label: 'Manali' },
+  { value: 'jodhpur', label: 'Jodhpur' },
+  { value: 'rishikesh', label: 'Rishikesh' },
+  { value: 'panaji', label: 'Panaji' },
+  { value: 'kochi', label: 'Kochi' }
 ];
 
 const customStyles = {

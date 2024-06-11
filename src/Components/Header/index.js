@@ -2,14 +2,62 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Select from 'react-select';
 import Background from './Background';
-import Logo from '../Images/headout.png';
-import MobileApp from '../Images/mobile-app.gif';
+import Logo from '../Images/bv.png';
 import '../Styles/Header.css';
 
 class Header extends Component {
   state = {
-    experience: ''
+    experience: '',
+    recommendation: null,
+    llm_response: null
   };
+
+  constructor(props) {
+    super(props);
+    this.fetchRecommendation = this.fetchRecommendation.bind(this);
+    this.fetchLLMResponse = this.fetchLLMResponse.bind(this);
+  }
+
+  async fetchRecommendation(user_input) {
+    try {
+      const response = await fetch('http://localhost:5000/recommend', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_input })
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const jsonData = await response.json();
+      this.setState({ recommendation: jsonData.recommendation });
+    } catch (err) {
+      console.log('Error:', err);
+    }
+  }
+  async fetchLLMResponse(user_input) {
+    try {
+      const response = await fetch('http://localhost:11434/api/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_input })
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const jsonData = await response.json();
+      this.setState({ llm_response: jsonData.llm_response });
+    } catch (err) {
+      console.log('Error:', err);
+    }
+  }
+  handleRecommendationInput = async (e) => {
+    const user_input = e.target.value;
+    await this.fetchRecommendation(user_input);
+  }
+  handleLLMInput = async (e) => {
+    const user_input = e.target.value;
+    await this.fetchLLMResponse(user_input);
+  }
 
   componentDidMount() {
     window.scrollTo(0, 0);
@@ -43,16 +91,17 @@ class Header extends Component {
               selectedCity={this.props.selectedCity}
             />
           </div>
-          <div className="select-experience-large">
-            <input
-              type="text"
-              placeholder="Search for experiences"
-              onChange={this.changeExperience}
-              value={this.state.experience}
-            />
-            <i className="fas fa-search" />
-          </div>
-          <button id="go">Let's Go</button>
+          <a href="/search-results" style={{'--clr': '#7808d0'}} className="button">
+            <span className="button__icon-wrapper">
+              <svg width="10" className="button__icon-svg" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 15">
+                <path fill="currentColor" d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"></path>
+              </svg>
+              <svg className="button__icon-svg button__icon-svg--copy" xmlns="http://www.w3.org/2000/svg" width="10" fill="none" viewBox="0 0 14 15">
+                <path fill="currentColor" d="M13.376 11.552l-.264-10.44-10.44-.24.024 2.28 6.96-.048L.2 12.56l1.488 1.488 9.432-9.432-.048 6.912 2.304.024z"></path>
+              </svg>
+            </span>
+            Let's Go
+          </a>
         </div>
       </React.Fragment>
     );
@@ -64,7 +113,7 @@ export class HeaderNav extends Component {
     navigationData: [
       {
         id: 1,
-        name: 'Headout Picks'
+        name: 'Top Picks'
       },
       {
         id: 2,
@@ -72,15 +121,15 @@ export class HeaderNav extends Component {
       },
       {
         id: 3,
-        name: 'Abu Dhabi City Tours'
+        name: 'City Tours'
       },
       {
         id: 4,
-        name: 'Amsterdam Attractions'
+        name: 'Attractions'
       },
       {
         id: 5,
-        name: 'Burj Khalifa'
+        name: 'Special Offers'
       }
     ]
   };
@@ -134,7 +183,7 @@ export class HeaderNav extends Component {
                       marginRight: '0px'
                     }}
                   >
-                    English/USD
+                    English/INR
                     <span className="arrow-down">
                       {' '}
                       <i className="fas fa-angle-down" />
@@ -145,7 +194,7 @@ export class HeaderNav extends Component {
             </div>
             <div className="header-right">
               <a
-                href="https://lastnamearya.github.io"
+                href="https://ayushmanbhatt.github.io/portfolio/"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{ textDecoration: 'none' }}
@@ -154,12 +203,12 @@ export class HeaderNav extends Component {
                   {/* <i className="fas fa-user-circle sign-in-user" /> */}
                   <div className="lastnamearya-img">
                     <img
-                      src="https://secure.gravatar.com/avatar/413b990ccd2cf5ba69d609fdba4f0302"
+                      src="https://gravatar.com/avatar/4d5f751d5f19a082aed8dcfa9fe15918?size=256&cache=1712165991959"
                       alt="lastnamearya"
                     />
                   </div>
                   <p style={{ color: '#ec1943', marginLeft: '5px' }}>
-                    lastnamearya
+                    Ayushman Bhatt
                     <span className="arrow-down">
                       {' '}
                       <i className="fas fa-angle-down" />
@@ -167,17 +216,7 @@ export class HeaderNav extends Component {
                   </p>
                 </div>
               </a>
-              <Link
-                to={{ pathname: `/app` }}
-                style={{
-                  textDecoration: 'none'
-                }}
-              >
-                <div className="download-app">
-                  <img src={MobileApp} id="mobile-app" alt="Download our App" />
-                  <p style={{ color: '#24a1b2' }}>Download App</p>
-                </div>
-              </Link>
+              
             </div>
           </div>
         </div>
@@ -187,21 +226,21 @@ export class HeaderNav extends Component {
 }
 
 const options = [
-  { value: 'new-york', label: 'New York' },
-  { value: 'las-vegas', label: 'Las Vegas' },
-  { value: 'rome', label: 'Rome' },
-  { value: 'paris', label: 'Paris' },
-  { value: 'london', label: 'London' },
-  { value: 'dubai', label: 'Dubai' },
-  { value: 'barcelona', label: 'Barcelona' },
-  { value: 'madrid', label: 'Madrid' },
-  { value: 'singapore', label: 'Singapore' },
-  { value: 'venice', label: 'Venice' },
-  { value: 'milan', label: 'Milan' },
-  { value: 'naples', label: 'Naples' },
-  { value: 'budapest', label: 'Budapest' },
-  { value: 'edinburg', label: 'Edinburg' },
-  { value: 'florence', label: 'Florence' }
+  { value: 'nainital', label: 'Nainital' },
+  { value: 'delhi', label: 'Delhi' },
+  { value: 'jaipur', label: 'Jaipur' },
+  { value: 'mumbai', label: 'Mumbai' },
+  { value: 'shimla', label: 'Shimla' },
+  { value: 'ooty', label: 'Ooty' },
+  { value: 'varanasi', label: 'Varanasi' },
+  { value: 'agra', label: 'Agra' },
+  { value: 'chennai', label: 'Chennai' },
+  { value: 'mussoorie', label: 'Mussoorie' },
+  { value: 'manali', label: 'Manali' },
+  { value: 'jodhpur', label: 'Jodhpur' },
+  { value: 'rishikesh', label: 'Rishikesh' },
+  { value: 'panaji', label: 'Panaji' },
+  { value: 'kochi', label: 'Kochi' }
 ];
 
 const customStyles = {

@@ -1,31 +1,34 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import MainHome from './Components/MainHome';
-import NewYork from './Components/NewYork';
+import Nainital from './Components/Nainital';
 import AppStore from './Components/AppStore';
+import Delhi from './Components/Delhi';
+import Jaipur from './Components/Jaipur'
+import Mumbai from './Components/Mumbai';
+import SearchResults from './Components/SearchResults';
 
 const CityRoutes = () => (
-  <BrowserRouter>
-    <Switch>
-      <Route exact path="/" component={MainHome} />
-      <Route exact path="/cities/new-york" component={NewYork} />
-      <Route exact path="/cities/las-vegas" component={MainHome} />
-      <Route exact path="/cities/rome" component={MainHome} />
-      <Route exact path="/cities/paris" component={MainHome} />
-      <Route exact path="/cities/london" component={MainHome} />
-      <Route exact path="/cities/dubai" component={MainHome} />
-      <Route exact path="/cities/barcelona" component={MainHome} />
-      <Route exact path="/cities/madrid" component={MainHome} />
-      <Route exact path="/cities/singapore" component={MainHome} />
-      <Route exact path="/cities/venice" component={MainHome} />
-      <Route exact path="/cities/milan" component={MainHome} />
-      <Route exact path="/cities/naples" component={MainHome} />
-      <Route exact path="/cities/budapest" component={MainHome} />
-      <Route exact path="/cities/edinburg" component={MainHome} />
-      <Route exact path="/cities/florence" component={MainHome} />
-      <Route exact path="/app" component={AppStore} />
-    </Switch>
-  </BrowserRouter>
+  <Routes>
+    <Route exact path="/home" Component={MainHome} />
+    <Route exact path="/cities/nainital" Component={Nainital} />
+    <Route exact path="/cities/delhi" Component={Delhi} />
+    <Route exact path="/cities/jaipur" Component={Jaipur} />
+    <Route exact path="/cities/mumbai" Component={Mumbai} />
+    <Route exact path="/cities/london" Component={MainHome} />
+    <Route exact path="/cities/dubai" Component={MainHome} />
+    <Route exact path="/cities/barcelona" Component={MainHome} />
+    <Route exact path="/cities/madrid" Component={MainHome} />
+    <Route exact path="/cities/singapore" Component={MainHome} />
+    <Route exact path="/cities/venice" Component={MainHome} />
+    <Route exact path="/cities/milan" Component={MainHome} />
+    <Route exact path="/cities/naples" Component={MainHome} />
+    <Route exact path="/cities/budapest" Component={MainHome} />
+    <Route exact path="/cities/edinburg" Component={MainHome} />
+    <Route exact path="/cities/florence" Component={MainHome} />
+    <Route exact path="/app" Component={AppStore} />
+    <Route exact path="/search-results" Component={SearchResults} />
+  </Routes>
 );
 
 export default CityRoutes;
